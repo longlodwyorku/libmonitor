@@ -1,0 +1,15 @@
+version: '3'
+services:
+  libmonitordevcontainer:
+    container_name: libmonitordevcontainer
+    image: rockylinux
+    user: $USER
+    volumes:
+      - ..:/workspace/libmonitor
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/libmonitor
+    environment:
+      - DISPLAY
+      - MPLBACKEND=TKAgg
