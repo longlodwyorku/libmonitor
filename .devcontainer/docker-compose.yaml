@@ -2,8 +2,14 @@ version: '3'
 services:
   libmonitordevcontainer:
     container_name: libmonitordevcontainer
-    image: rockylinux
-    user: $USER
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - USER=$USER
+        - UID=$UID
+    image: libmonitordevimage
+    user: $UID
     volumes:
       - ..:/workspace/libmonitor
       - /tmp/.X11-unix:/tmp/.X11-unix

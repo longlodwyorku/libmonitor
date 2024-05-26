@@ -6,7 +6,10 @@ mkShell {
     bear
     gnumake
   ];
-  shellHook = '''';
+  shellHook = ''
+    export USER=$(id -un)
+    export UID=$(id -u)
+  '';
   nativeBuildInputs = with pkgs; [];
   buildInputs = with pkgs; [];
 }
