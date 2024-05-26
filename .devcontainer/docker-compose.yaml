@@ -11,11 +11,11 @@ services:
     image: libmonitordevimage
     user: $UID
     volumes:
-      - ..:/workspace/libmonitor
+      - ..:/home/$USER/workspace/libmonitor
       - /tmp/.X11-unix:/tmp/.X11-unix
     tty: true
     stdin_open: true
-    working_dir: /workspace/libmonitor
+    working_dir: /home/$USER/workspace/libmonitor
     environment:
       - DISPLAY
       - MPLBACKEND=TKAgg
