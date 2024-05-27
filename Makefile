@@ -25,6 +25,7 @@ sample: examples/sample.cpp libnixmonitor.so
 install: libmonitor.so include/monitor.hpp
 	mkdir -p $(DESTDIR)/usr/lib64 $(DESTDIR)/usr/include
 	install shared/libmonitor.so $(DESTDIR)/usr/lib64/
+	install shared/libmonitor.so $(DESTDIR)/usr/lib64/libmonitor.so.0
 	install include/monitor.hpp $(DESTDIR)/usr/include/
 
 clean:

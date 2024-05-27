@@ -41,12 +41,10 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %files
-%license add-license-file-here
-%doc add-main-docs-here
+%license LICENSE
 %{_libdir}/*.so.*
 
 %files devel
-%doc add-devel-docs-here
 %{_includedir}/*
 %{_libdir}/*.so
 
