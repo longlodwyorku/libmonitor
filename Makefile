@@ -23,8 +23,8 @@ sample: examples/sample.cpp libnixmonitor.so
 	$(CC) $(FLAGS) -o bin/sample examples/sample.cpp -L ./shared -lmonitor -Wl,-rpath=./shared/
 
 install: libmonitor.so include/monitor.hpp
-	cp shared/libmonitor.so /usr/lib64/libmonitor.so
-	cp include/monitor.hpp /usr/include/monitor.hpp
+	install shared/libmonitor.so $(DESTDIR)/usr/lib64/
+	install include/monitor.hpp $(DESTDIR)/usr/include/
 
 clean:
 	rm -rf obj/* bin/* shared/*

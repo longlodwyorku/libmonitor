@@ -28,7 +28,6 @@ developing applications that use %{name}.
 
 
 %build
-%configure --disable-static
 %make_build
 
 
