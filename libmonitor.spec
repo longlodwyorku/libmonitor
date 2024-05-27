@@ -3,13 +3,12 @@ Version:        0
 Release:        1%{?dist}
 Summary:        Dynamic library for getting cpu and memory usage
 
-License:        
+License:        MIT
 URL:            https://github.com/longlodwyorku/libmonitor
-Source0:        %URL/archive/ref/tags/v%{version}.tar.gz
+Source0:        %URL/archive/refs/tags/v%{version}.tar.gz
 
 BuildRequires: g++
 BuildRequires: make
-Requires:       
 
 %description
 The %{name} package contains libraries for
