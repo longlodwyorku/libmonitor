@@ -22,6 +22,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.
 
+%global debug_package %{nil}
 
 %prep
 %autosetup
