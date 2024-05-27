@@ -2,7 +2,7 @@ FLAGS = -std=c++20 -Wall -Wextra -Werror -pedantic $(NIX_CFLAGS_COMPILE)
 NCC = c++
 CC = g++
 
-libmonitor.so: nixmonitor.o include/monitor.hpp
+libmonitor.so: monitor.o include/monitor.hpp
 	mkdir -p shared
 	$(CC) -shared -o shared/libmonitor.so obj/monitor.o
 
