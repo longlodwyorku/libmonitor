@@ -44,10 +44,10 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %files
 %license LICENSE
 %{_libdir}/*.so.*
+%{_libdir}/*.so
 
 %files devel
 %{_includedir}/*
-%{_libdir}/*.so
 
 
 %changelog
