@@ -2,31 +2,32 @@ FLAGS = -std=c++20 -Wall -Wextra -Werror -pedantic $(NIX_CFLAGS_COMPILE)
 NCC = c++
 CC = g++
 
-libmonitor.so: monitor.o include/monitor.hpp
+shared/libmonitor.so: obj/monitor.o
 	mkdir -p shared
-	$(CC) -shared -o shared/libmonitor.so obj/monitor.o
+	$(CC) -shared -o $@ $^
 
-nixmonitor.o: src/monitor.cpp include/monitor.hpp
+obj/nixmonitor.o: src/monitor.cpp include/monitor.hpp
 	mkdir -p obj
-	$(NCC) -c -fPIC -o obj/monitor.o src/monitor.cpp
+	$(NCC) -c -fPIC -o $@ $<
 
-libnixmonitor.so: nixmonitor.o include/monitor.hpp
+shared/libnixmonitor.so: obj/nixmonitor.o 
 	mkdir -p shared
-	$(NCC) -shared -o shared/libmonitor.so obj/monitor.o
+	$(NCC) -shared -o $@ $^
 
-monitor.o: src/monitor.cpp include/monitor.hpp
+obj/monitor.o: src/monitor.cpp include/monitor.hpp
 	mkdir -p obj
-	$(CC) -c -fPIC -o obj/monitor.o src/monitor.cpp
+	$(CC) -c -fPIC -o $@ $<
 
-sample: examples/sample.cpp libnixmonitor.so
+sample: examples/sample.cpp shared/libnixmonitor.so
 	mkdir -p bin
 	$(CC) $(FLAGS) -o bin/sample examples/sample.cpp -L ./shared -lmonitor -Wl,-rpath=./shared/
 
-install: libmonitor.so include/monitor.hpp
+install: shared/libmonitor.so include/monitor.hpp
 	mkdir -p $(DESTDIR)/usr/lib64 $(DESTDIR)/usr/include
-	install shared/libmonitor.so $(DESTDIR)/usr/lib64/
-	install shared/libmonitor.so $(DESTDIR)/usr/lib64/libmonitor.so.0
-	install include/monitor.hpp $(DESTDIR)/usr/include/
+	rm -f $(DESTDIR)/usr/lib64/libmonitor.so $(DESTDIR)/usr/include/monitor.hpp
+	install $< $(DESTDIR)/usr/lib64/libmonitor.so.0
+	ln -s $(DESTDIR)/usr/lib64/libmonitor.so.0 $(DESTDIR)/usr/lib64/libmonitor.so
+	install $(word 2, $^) $(DESTDIR)/usr/include/
 
 clean:
 	rm -rf obj/* bin/* shared/*
