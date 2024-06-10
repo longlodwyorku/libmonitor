@@ -27,8 +27,7 @@ float monitor::get_cpu_usage() {
     return 0.0;
   }
 
-  unsigned long long idle_total = idle + iowait;
-  return ((double)(total - idle_total)) / total;
+  return ((double)(total - idle)) / total;
 }
 
 float monitor::get_memory_usage() {
