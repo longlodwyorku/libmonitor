@@ -34,7 +34,7 @@ float monitor::get_memory_usage(size_t us) {
   if (sample_memory_usage(s1) != 0) {
     return -1;
   }
-  usleep(ms);
+  usleep(us);
   if (sample_memory_usage(s2) != 0) {
     return -1;
   }
