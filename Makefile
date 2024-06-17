@@ -18,9 +18,14 @@ obj/monitor.o: src/monitor.cpp include/monitor.hpp
 	mkdir -p obj
 	$(CC) -c -fPIC -o $@ $<
 
-sample: examples/sample.cpp shared/libnixmonitor.so
+bin/nixsample: examples/sample.cpp shared/libnixmonitor.so
 	mkdir -p bin
 	$(CC) $(FLAGS) -o bin/sample examples/sample.cpp -L ./shared -lmonitor -Wl,-rpath=./shared/
+
+bin/sample: examples/sample.cpp shared/libmonitor.so
+	mkdir -p bin
+	$(CC) $(FLAGS) -o bin/sample examples/sample.cpp -L ./shared -lmonitor -Wl,-rpath=./shared/
+
 
 install: shared/libmonitor.so include/monitor.hpp
 	mkdir -p $(DESTDIR)/usr/lib64 $(DESTDIR)/usr/include

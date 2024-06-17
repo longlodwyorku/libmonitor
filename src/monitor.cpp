@@ -29,20 +29,15 @@ float monitor::get_cpu_usage(size_t us) {
   return ((double)(s2.first - s1.first)) / total;
 }
 
-float monitor::get_memory_usage(size_t us) {
-  std::pair<size_t, size_t> s1, s2;
-  if (sample_memory_usage(s1) != 0) {
+float monitor::get_memory_usage() {
+  std::pair<size_t, size_t> s;
+  if (sample_memory_usage(s) != 0) {
     return -1;
   }
-  usleep(us);
-  if (sample_memory_usage(s2) != 0) {
-    return -1;
+  if (s.second) {
+    return ((double)s.first) / s.second;
   }
-  uint64_t total = s2.second - s1.second;
-  if (total == 0) {
-    return 0;
-  }
-  return ((double)(s2.first - s1.first)) / total;
+  return 0;
 }
 
 int monitor::sample_cpu_usage(std::pair<uint64_t, uint64_t> &s) {
